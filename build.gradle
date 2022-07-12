@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version '2.6.2'
+}
+
+mainClassName = 'com.mns.reviews.Application'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springBootVersion = '2.6.2'
+    springBootJpaVersion = '2.7.1'
+    springTestVersion = '2.6.2'
+    springBootToolsVersion = '5.2.4'
+    lombokVersion = '1.18.24'
+    jaxbVersion = '2.3.0'
+
+}
+
+applicationDefaultJvmArgs = ["-javaagent:$project.buildDir/newrelic/newrelic.jar"]
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: "${jaxbVersion}"
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.7.1'
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "${springTestVersion}"
+    implementation group: 'com.h2database', name: 'h2', version: '1.3.148'
+}
+
+test {
+    useJUnitPlatform()
+}
